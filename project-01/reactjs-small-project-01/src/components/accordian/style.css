@@ -4,6 +4,7 @@
   width: 100vw;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .accordian {
@@ -12,4 +13,8 @@
 
 .item {
   background-color: #614101;
+}
+
+.expandBtn {
+  border: 1px solid blue;
 }

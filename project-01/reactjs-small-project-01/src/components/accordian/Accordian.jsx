@@ -3,13 +3,26 @@ import data from "./data";
 import "./style.css";
 
 const Accordian = () => {
-  const [selected, setSelected] = useState(null);
+  //   const [selected, setSelected] = useState(null);
+
+  const [showSingle, setShowSingle] = useState(false);
 
   const [selectedArr, setSelectedArr] = useState([]);
 
+  function toggleMode() {
+    setShowSingle(!showSingle);
+  }
+
   function handleSingleSelection(id) {
     // setSelected(id === selected ? null : id);
+    if (selectedArr.includes(id)) {
+      setSelectedArr([]);
+    } else {
+      setSelectedArr([id]);
+    }
+  }
 
+  function handleMultiSelection(id) {
     if (selectedArr.includes(id)) {
       const newSelectedArr = selectedArr.filter((e) => e !== id);
       setSelectedArr([...newSelectedArr]);
@@ -20,20 +33,28 @@ const Accordian = () => {
         setSelectedArr([id]);
       }
       //   setSelectedArr(selectedArr.length > 0 ? [...selectedArr, id] : [id]);
-      console.log(`add hua: ${selectedArr}`);
     }
+    console.log(selectedArr);
   }
 
   return (
     <div className="wrapper">
+      <button onClick={toggleMode}>Switch</button>
       <div className="accordian">
         {data && data.length > 0 ? (
           data.map((d) => (
             <div className="item" key={d.id}>
               <div className="title">
                 <p>{d.question}</p>
-                <p onClick={() => handleSingleSelection(d.id)}>
-                  {selected === d.id ? "–" : "+"}
+                <p
+                  className="expandBtn"
+                  onClick={
+                    showSingle
+                      ? () => handleSingleSelection(d.id)
+                      : () => handleMultiSelection(d.id)
+                  }
+                >
+                  {/* {selected === d.id ? "–" : "+"} */}+
                 </p>
               </div>
               {/* {selected === d.id ? <div>{d.answer}</div> : null} */}
