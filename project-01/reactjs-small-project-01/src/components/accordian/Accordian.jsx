@@ -10,6 +10,7 @@ const Accordian = () => {
   const [selectedArr, setSelectedArr] = useState([]);
 
   function toggleMode() {
+    setSelectedArr([]);
     setShowSingle(!showSingle);
   }
 
