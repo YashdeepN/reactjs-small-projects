@@ -10,6 +10,11 @@ const StarRating = ({ numOfStars }) => {
     setStrClr("yellow");
   }
 
+  function handleMouseEnter(i) {
+    setCurrentSelectIndex(i);
+    setStrClr("yellow");
+  }
+
   return (
     <div>
       {[...Array(numOfStars)].map((_, index) => (
@@ -18,6 +23,8 @@ const StarRating = ({ numOfStars }) => {
           size={50}
           onClick={() => handleClick(index)}
           color={index <= currntSelectIndex ? strClr : null}
+          onMouseEnter={() => handleMouseEnter(index)}
+          onMouseLeave={() => handleMouseLeave(index)}
         />
       ))}
     </div>
