@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
 const StarRating = ({ numOfStars }) => {
-  let [strClr, setStrClr] = useState(null);
+  const [currentHoverIndex, setCurrentHoverIndex] = useState(null);
   const [currntSelectIndex, setCurrentSelectIndex] = useState(null);
 
   function handleClick(i) {
     setCurrentSelectIndex(i);
-    setStrClr("yellow");
   }
 
   function handleMouseEnter(i) {
-    setCurrentSelectIndex(i);
-    setStrClr("yellow");
+    setCurrentHoverIndex(i);
+  }
+
+  function handleMouseLeave(i) {
+    setCurrentHoverIndex(null);
   }
 
   return (
@@ -21,10 +23,18 @@ const StarRating = ({ numOfStars }) => {
         <FaStar
           key={index}
           size={50}
-          onClick={() => handleClick(index)}
-          color={index <= currntSelectIndex ? strClr : null}
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={() => handleMouseLeave(index)}
+          onMouseEnter={() => handleMouseEnter(index + 1)}
+          onMouseLeave={() => handleMouseLeave(index + 1)}
+          onClick={() => handleClick(index + 1)}
+          color={
+            currentHoverIndex
+              ? index < currentHoverIndex
+                ? "yellow"
+                : null
+              : index < currntSelectIndex
+              ? "yellow"
+              : null
+          }
         />
       ))}
     </div>
