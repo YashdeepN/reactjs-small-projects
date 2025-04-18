@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 
+import "./style.css";
+
 const ImageSlider = ({ url, page, limit }) => {
   const [images, setImages] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
-
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   async function fetchImages(url) {
@@ -23,6 +25,14 @@ const ImageSlider = ({ url, page, limit }) => {
     }
   }
 
+  function handlePrevious() {
+    setCurrentSlide(currentSlide === 0 ? images.length - 1 : currentSlide - 1);
+  }
+
+  function handleNext() {
+    setCurrentSlide(currentSlide === images.length - 1 ? 0 : currentSlide + 1);
+  }
+
   useEffect(() => {
     if (url) fetchImages(url);
   }, [url]);
@@ -33,10 +43,16 @@ const ImageSlider = ({ url, page, limit }) => {
 
   return (
     <div className="container">
-      <BsArrowLeftCircleFill className="arrow arrowLeft" />
+      <BsArrowLeftCircleFill
+        className="arrow arrowLeft"
+        onClick={handlePrevious}
+      />
       {images
-        ? images.map((image) => (
+        ? images.map((image, index) => (
             <img
+              className={
+                currentSlide === index ? "currentImage" : "hideCurrentImage"
+              }
               height={"200px"}
               width={"300px"}
               key={image.id}
@@ -45,11 +61,22 @@ const ImageSlider = ({ url, page, limit }) => {
             />
           ))
         : null}
-      <BsArrowRightCircleFill className="arrow arrowRight" />
+      <BsArrowRightCircleFill
+        className="arrow arrowRight"
+        onClick={handleNext}
+      />
       <span className="circleIndicators">
         {images
           ? images.map((_, index) => (
-              <button key={index} className="curruntIndicator"></button>
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={
+                  currentSlide === index
+                    ? "curruntIndicator"
+                    : "inactiveIndicator curruntIndicator"
+                }
+              ></button>
             ))
           : null}
       </span>
