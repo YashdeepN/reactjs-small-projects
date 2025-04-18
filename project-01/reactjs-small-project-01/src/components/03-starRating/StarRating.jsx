@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
+import "./style.css";
 
 const StarRating = ({ numOfStars }) => {
   const [currentHoverIndex, setCurrentHoverIndex] = useState(null);
@@ -14,7 +15,7 @@ const StarRating = ({ numOfStars }) => {
   }
 
   function handleMouseLeave(i) {
-    setCurrentHoverIndex(null);
+    setCurrentHoverIndex(currntSelectIndex);
   }
 
   return (
@@ -29,7 +30,7 @@ const StarRating = ({ numOfStars }) => {
           color={
             currentHoverIndex
               ? index < currentHoverIndex
-                ? "yellow"
+                ? "#fff700"
                 : null
               : index < currntSelectIndex
               ? "yellow"
