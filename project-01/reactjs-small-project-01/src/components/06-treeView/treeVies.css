@@ -1,0 +1,28 @@
+#root {
+  padding: 0;
+}
+body {
+  margin: 0;
+}
+
+.treeViewContainer {
+  min-height: 100vh;
+  width: 350px;
+  background: rgb(0, 71, 110);
+  margin: 0;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+
+  gap: 20px;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+}
+
+.menuListContainer {
+  list-style-type: none;
+  margin: 0 0;
+}
