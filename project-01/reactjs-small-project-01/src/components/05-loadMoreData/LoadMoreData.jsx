@@ -47,7 +47,12 @@ const LoadMoreData = () => {
         ))}
       </div>
       <div className="buttonContainer">
-        <button onClick={() => setCount(count + 1)}>Load More Products</button>
+        <button
+          disabled={count === 4 ? true : false}
+          onClick={() => setCount(count + 1)}
+        >
+          Load More Products
+        </button>
       </div>
     </div>
   );
